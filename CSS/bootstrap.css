@@ -10,6 +10,7 @@ html {
       -ms-text-size-adjust: 100%;
 }
 body {
+  h1{font-color: red;}
   margin: 0;
 
  background-color: rgba(255, 255, 128, .5); 
