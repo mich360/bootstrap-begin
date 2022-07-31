@@ -11,7 +11,8 @@ html {
 }
 body {
   margin: 0;
- background-color: light-blue;
+
+ background-color: rgba(255, 255, 128, .5); 
 }
 article,
 aside,
