@@ -1,2 +1,2 @@
-# BS3
-site  →　 https://mich360.github.io/BS3/
+# bootstrap練習です
+
