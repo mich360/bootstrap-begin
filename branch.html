@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ブランチ</title>
+   <link rel="stylesheet" href="https://unpkg.com/sanitize.css">
+   <style>
+      
+      body{
+         margin: 10px;
+      }
+      article{
+         margin-left: 40px;
+      }
+      pre{
+      color: blueviolet; font-size: 26px;
+      margin: 0;
+      padding: 0;
+   }
+   .target {
+      all: unset;
+      }
+   p{
+      color: rgb(77, 8, 8);
+      background-image: url(./bigsity.jpg);
+      background-color: rgb(238, 250, 248);
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 2.5;
+      width: 1000px;
+      padding-left: 0;
+      margin-bottom: 1px;
+      margin-left: 1.4%;
+   }
+   section{
+      max-width: 1120px;
+      margin-left: 1.4%;
+      margin-right: auto;
+      background-color: rgb(238, 243, 243);
+   }
+   </style>
+</head>
+<body>
+   <h1>Git ・Github の安全なコードを管理・ローカルで作業</h1>
+   <article>
+      <h2>GitHubからプロジェクトを取得（クローン）</h2>
+      <p>方法①: HTTPS を使う</p>
+      <pre><code>git clone https://github.com/ユーザー名/リポジトリ名.git</code></pre>
+      <p>方法②: SSH を使う（SSH 設定済みの場合）</p>
+      <pre><code>git clone git@github.com:ユーザー名/リポジトリ名.git</code></pre>
+   <p>クローン後は、作業フォルダへ移動 </p>
+   <p>🔹 現在のブランチを確認,main などのブランチが表示されるはず。</p>
+   <pre><code>cd sample-project
+git branch</code></pre>
+  </article>
+   　<article>
+  <diV>
+  
+  <h2> 📌 1. ブランチを作成する</h2>
+  <div>
+   <small>前提条件
+      リポジトリの準備
+      
+      すでに Git リポジトリが存在している (git init または git clone 済み)
+      git status を実行し、作業ディレクトリがクリーンであることを確認（未コミットの変更がない）</small><br>
+      <small>リモートとの同期、<br>最新の状態からブランチを作成するために、git pull origin main などで最新の変更を取得しておく( git checkout main  # main ブランチに移動ここに居るここに居る前提)</small>
+  </div>
+
+  <p>✅ 方法①: ターミナルで作成 VS Code を開く（作成したproject のフォルダを開く）
+   <br>ターミナルを開く（⌘ + ~ または Terminal > New Terminal）新しいブランチを作成する</p>
+  </diV> 
+  <pre style="color: blueviolet; font-size: 20px;"><code>   git checkout -b feature-branch    又は git switch -c feature-branch
+
+現在のブランチを確認する
+
+git branch
+✅ feature-branch に切り替わっていればOK！
+
+git remote -v
+✅ リモートリポジトリの名前（通常は origin）と、それに対応するURLが表示されます。
+
+git remote show origin
+✅ より詳しいリモートリポジトリの詳細情報
+  </code></pre>
+  <div>
+  <p> ✅ 方法②: VS Code の GUI で作成 VS Code の左下にあるブランチ名をクリック「+ Create New Branch」を選択<br>
+ブランチ名を入力（例: feature-branch）Enterキーを押してブランチ作成 自動で新しいブランチに切り替わる！</p><br>
+<h2>📌 2. コードを編集し、コミットする</h2>
+✅ ファイルを変更して保存　　＞　　エディタでコードを編集　　＞　保存（⌘ + S）　<br>
+✅ 変更をステージング（add）＞　　ターミナルで以下を実行：<br>
+
+  </div>
+  <pre><code>
+   git add .
+  </code></pre>
+  <div>
+   または、VS Code の「ソース管理」タブ（左側の Git アイコン）で変更を選択し、「+」をクリック。<br>
+
+✅ コミット  </div>
+<pre><code> git commit -m "新しい機能を追加"
+
+</code></pre>
+<div>または、VS Code の「ソース管理」タブでメッセージを入力し、「✔（チェックマーク）」をクリック。<br>
+
+   <h2>📌 3. GitHub にプッシュ</h2>
+　ターミナルで：
+</div>
+  <pre><code> git push origin feature-branch</code></pre>
+  <div>または、VS Code の「ソース管理」タブの「...」メニューから「Push」を選択。</div>
+
+   <h2>📌 4. Pull Request（PR）を作成　(git merge feature-branch は不要)</h2>
+   <section>
+      <h3>1</h3>✅新しいブランチで開発 まず、ローカルで新しいブランチを作成し、変更を加えます。
+<pre style="font-size: 14px; color: #db162a;"><code>
+git checkout -b feature-branch  
+     
+git add .                      
+git commit -m "新機能を追加"     
+git push origin feature-branch     # 終わってたらパス　🙅
+</code></pre>
+   </section>
+   <section><h3>2.Pull Request</h3> ✅ GitHub にアクセス ＞　リポジトリを開く＞「Pull requests」タブをクリック（画面上部のメニューにある） ＞「New pull request」ボタンをクリック。＞ マージ元（feature-branch）とマージ先（main）を選択。・マーク左側の記入枠： base（統合先のブランチ、通常は main）・右側の記入枠： compare（統合元のブランチ、通常は feature-branch） ・ 矢印（←）： compare の変更を base に統合する ことを示す。
+　＞「Create pull request」ボタンをクリック。
+　＞ タイトルと説明を記入し、再度「Create pull request」ボタンを押す。</section><pre><code>「Pull requests」→「New pull request」
+ feature-branch → main を選択
+ 変更を確認して「Create pull request」</code></pre>
+ <section>
+   <h3>3</h3> ✅コードレビュー（必要に応じて）
+他のメンバーがPRをレビューし、フィードバックをもらう。
+修正が必要なら、feature-branch に変更を加えて git push origin feature-branch で更新。
+問題がなければ承認を得る。<br>
+
+<h3>4</h3>✅PRを main にマージする手順<br>
+   GitHubのPRページを開く
+   「Merge pull request」ボタンをクリック
+   「Confirm merge」ボタンをクリック（マージの確定）
+   （任意）「Delete branch」ボタンを押して、不要な feature-branch を削除
+   
+<br><h3>5</h3>5✅ローカルの main を最新に更新
+リモートの main に変更がマージされたので、ローカル環境も更新する。
+
+<pre>ローカル環境も更新
+git checkout main  # mainブランチに移動
+git pull origin main  # 最新の状態に更新
+git branch -d feature-branch  # ローカルの feature-branch を削除（不要なら）
+</pre>
+ 
+
+<h2>📌 5. 作業終了後、ブランチを削除</h2>
+✅ マージが完了したら、ブランチを削除して整理：
+<pre><code>     git branch -d feature-branch
+　　 git branch -D feature-branch　　　　　　　　
+     git push origin --delete feature-branch　
+  
+   1行目:ローカルブランチの削除     　
+   2行目:-dオプションは、マージされていない変更があれば警告を表示します。
+   　　　　　　　　　　もし強制的に削除したい場合は、-Dオプションを使用できます：
+   3行目:ローカルおよびリモートの両方で feature-branch が削除されます
+
+   解説
+         git branch -d feature/add-login                    
+         git branch -D feature/add-login                    
+         git push origin --delete feature/add-login         
+         又は　　git push origin :feature/add-login         
+         git fetch --prune　　　　　　　　　　　　　　　　　
+
+　　　　1行目:ローカルブランチの削除
+　　　　2行目:未マージのブランチを強制削除（注意⚠️）
+　　　　3行目:リモートブランチの削除（GitHub などのリモートリポジトリ）
+　　　　4行目:リモートリポジトリ上の feature/add-login を削除
+　　　　5行目:削除されたリモートブランチの情報をローカルからも消す（リストを整理）<hr>🔹 これでブランチをきれいに管理
+
+ローカルブランチ削除 →git branch -d feature/add-login
+リモートブランチ削除 →git push origin --delete feature/add-login
+ローカルのリモート情報を整理 →git fetch --prune
+</code></pre>
+<pre style="color: #db162a;"><code>
+🔹 簡単に
+         git branch -d feature-branch
+         git push origin --delete feature-branch
+
+         git fetch --prune
+</code></pre>
+</div>
+<diV>
+   🎯 まとめ<br>
+<p>✅ VS Code で Git ブランチを作成・編集・プッシュする流れ ブランチ作成（ターミナル or GUI）<br>
+コード編集 & 保存<br>
+コミット（add → commit）<br>
+GitHub にプッシュ<br>
+Pull Request（PR）で main に統合<br>
+不要なブランチを削除<br>
+👩‍💻 VS Code なら Git 操作が簡単！</p> 
+</diV>
+</article>
+<article>
+   <h1>Git - feature-branch の変更を main に反映させる方法</h1>
+   <p>ブランチ <code>feature-branch</code> で作業を進めた後、その変更を元のブランチ（例えば <code>main</code>）に反映させるには、<strong>マージ</strong> または <strong>リベース</strong> の方法を使います。</p>
+ 
+   <h2>1. feature-branch を main にマージする方法</h2>
+   <p>まず、<code>main</code> ブランチに切り替えます。</p>
+   <pre><code>git checkout main</code></pre>
+   <p>次に、<code>feature-branch</code> を <code>main</code> にマージします。</p>
+   <pre><code>git merge feature-branch</code></pre>
+   <p>これで、<code>feature-branch</code> の変更内容が <code>main</code> に統合されます。</p>
+   <p>最後に、マージした内容をGitHubにプッシュします。</p>
+   <pre><code>git push origin main</code></pre>
+ 
+   <h2>2. feature-branch を main にリベースする方法</h2>
+   <p>リベースを使うと、<code>feature-branch</code> の変更履歴を <code>main</code> の上に直線的に積み上げることができます。</p>
+   <p>まず、<code>main</code> ブランチに切り替えます。</p>
+   <pre><code>git checkout main</code></pre>
+   <p>次に、<code>feature-branch</code> を <code>main</code> にリベースします。</p>
+   <pre><code>git rebase feature-branch</code></pre>
+   <p>これで、<code>main</code> に <code>feature-branch</code> の変更が反映されます。</p>
+   <p>リベース後、変更内容をGitHubにプッシュします。</p>
+   <pre><code>git push origin main</code></pre>
+   <p>もしリベース後にコンフリクトが発生した場合、コンフリクトを解消した後に以下のコマンドを実行します：</p>
+   <pre><code>git rebase --continue</code></pre>
+ 
+   <h2>3. コンフリクトの解決</h2>
+   <p>マージ時やリベース時にコンフリクトが発生することがあります。その場合は、該当するファイルを修正し、コンフリクトを解消した後にコミットします。</p>
+ 
+   <p>これらの手順で、<code>feature-branch</code> の変更を元の <code>main</code> ブランチに反映できます。</p>
+   <p>どちらの方法を選ぶかは、履歴がきれいに保たれるリベースや、単純に変更を統合したいマージを選ぶことができます。</p>
+   <h1>GitHubの認証方法の選択肢</h1>
+
+  <h2>1. Personal Access Token (PAT) を使用する場合</h2>
+  <a href="https://github.com/settings/tokens"><mark>GitHubのトークン設定ページ</mark></a>
+  <h3>Personal Access Tokenを生成</h3>
+  <p>GitHubにログイン後、<strong>Personal Access Token</strong> を生成します。</p>
+  <p>必要なスコープ（権限）を選択します。例えば、<code>repo</code> 権限を選択してリポジトリへのアクセスを許可します。</p>
+
+  <h3>git push 時にPATを使用</h3>
+  <p><code>git push</code> コマンドを実行すると、認証を求められます。</p>
+  <p>ユーザー名にはGitHubのユーザー名を入力し、パスワードの代わりに <strong>PAT</strong> を入力します。</p>
+
+  <h2>2. SSHを使用する場合</h2>
+  <h3>SSHキーの設定</h3>
+  <p>まず、<strong>SSHキー</strong> を生成して、GitHubアカウントに登録する必要があります。以下のコマンドでSSHキーを生成します：</p>
+  <pre><code>ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</code></pre>
+  <p>生成したSSH公開鍵（<code>~/.ssh/id_rsa.pub</code>）をGitHubに登録します。GitHubのSSHキー設定ページで公開鍵を追加できます。</p>
+
+  <h3>リモートURLをSSHに変更</h3>
+  <p>リモートURLをSSH形式に変更することで、今後のプッシュにおいてパスワードを求められず、SSHキーで認証されるようになります。</p>
+  <pre><code>git remote set-url origin git@github.com:username/repository.git</code></pre>
+  <p>これにより、<code>git push</code> 実行時にSSH経由で認証され、パスワードやPATを毎回入力する必要がなくなります。</p>
+
+  <h2>認証の再設定</h2>
+  <p>もし認証情報が正しくない場合、以下の方法で認証を再設定できます：</p>
+
+  <h3>Credential Helperをリセット</h3>
+  <p>Gitが保存している認証情報を削除して、再度認証を求められるようにします：</p>
+  <pre><code>git credential-osxkeychain erase</code></pre>
+
+  <h3>認証情報を手動で設定</h3>
+  <p><code>git config</code> を使って、ユーザー名やメールアドレスを手動で設定します：</p>
+  <pre><code>git config --global user.name "your_username"</code></pre>
+  <pre><code>git config --global user.email "your_email@example.com"</code></pre>
+  <p>これで、<code>git push</code> を行う際に、再度認証情報が求められるようになります。</p>
+
+  <p>上記の方法で、認証情報を適切に設定した後、GitHubへのプッシュを行うことができます。</p>
+
+ 
+</article>
+</body>
+</html>
+
